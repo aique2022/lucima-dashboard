@@ -2,6 +2,7 @@ import React from "react";
 import { DollarSign, TrendingUp, Activity } from "lucide-react";
 import CountUp from "react-countup";
 
+// Define the type for each stat card's props
 interface StatProps {
   title: string;
   value: number;
@@ -22,40 +23,36 @@ const StatCard: React.FC<StatProps> = ({ title, value, icon, trend }) => {
     </div>
   );
 };
+interface SalesStatisticsCardProps {
+  data: {
+    today: number;
+    total: number;
+  };
+}
 
-export function SalesStatisticsCard() {
-  const stats = [
+export const SalesStatisticsCard: React.FC<SalesStatisticsCardProps> = ({
+  data,
+}) => {
+  const stats: StatProps[] = [
     {
       title: "Today's Transactions",
-      value: 100,
+      value: data?.today,
       icon: <Activity className="h-5 w-5 text-gray-400" />,
-      trend: 12,
+      trend: 12, // Adjust the trend value as needed
     },
     {
       title: "Total Transactions",
-      value: 45231,
+      value: data?.total,
       icon: <TrendingUp className="h-5 w-5 text-gray-400" />,
-      trend: 8,
+      trend: 8, // Adjust the trend value as needed
     },
-    // {
-    //   title: "Today's Revenue",
-    //   value: 12234,
-    //   icon: <DollarSign className="h-5 w-5 text-gray-400" />,
-    //   trend: -3,
-    // },
-    // {
-    //   title: "Total Revenue",
-    //   value: 5123373,
-    //   icon: <DollarSign className="h-5 w-5 text-gray-400" />,
-    //   trend: 5,
-    // },
   ];
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 ">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
       {stats.map((stat, index) => (
         <StatCard key={index} {...stat} />
       ))}
     </div>
   );
-}
+};

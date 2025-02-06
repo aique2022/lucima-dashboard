@@ -1,23 +1,19 @@
 "use client";
 
 import { AppSidebar } from "@/components/app-sidebar";
-
-import { BarCharts } from "@/components/charts/bar-charts";
-import { RadialCharts } from "@/components/charts/radial-charts";
 import Header from "@/components/header";
 import { SalesStatisticsCard } from "@/components/sales-statistics-card";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import LocationLeaderboard from "./_components/leaderboard";
-import ServiceCard from "./_components/services";
-import { useFetchData } from "@/utils/fetchApi";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Box, Package } from "lucide-react";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { useFetchData } from "@/utils/fetchApi";
 
 const DashboardPage = () => {
-  const { data, error, isLoading } = useFetchData<any>(
-    `/transactions/assignee/lucima?&limit=5`
-  );
+  const { data } = useFetchData<any>(`/transactions/assignee/lucima/count`);
+
+  const formattedData = {
+    today: data?.data.today || 0,
+    total: data?.data.total || 0,
+  };
 
   return (
     <SidebarProvider>
@@ -35,22 +31,6 @@ const DashboardPage = () => {
                   <p className="text-purple-100">
                     Manage your lockers and track deliveries efficiently
                   </p>
-                  {/* <div className="flex space-x-2 pt-2">
-                    <Badge
-                      variant="secondary"
-                      className="bg-purple-400 hover:bg-purple-300 text-white"
-                    >
-                      <Box className="w-4 h-4 mr-1" />
-                      Active Lockers: 42
-                    </Badge>
-                    <Badge
-                      variant="secondary"
-                      className="bg-indigo-400 hover:bg-indigo-300 text-white"
-                    >
-                      <Package className="w-4 h-4 mr-1" />
-                      Pending Deliveries: 7
-                    </Badge>
-                  </div> */}
                 </div>
                 <div className="hidden md:block">
                   <svg
@@ -73,7 +53,7 @@ const DashboardPage = () => {
               </CardContent>
             </Card>
 
-            <SalesStatisticsCard />
+            <SalesStatisticsCard data={formattedData} />
           </div>
         </main>
       </SidebarInset>
