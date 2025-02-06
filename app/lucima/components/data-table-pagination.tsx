@@ -80,7 +80,7 @@ export function DataTablePagination<TData>({
           Page {currentPage} of {numOfPages}
         </div>
         <div className="flex items-center space-x-2">
-          <Button
+          {/* <Button
             variant="outline"
             className="hidden h-8 w-8 p-0 lg:flex"
             onClick={() => {
@@ -91,7 +91,7 @@ export function DataTablePagination<TData>({
           >
             <span className="sr-only">Go to first page</span>
             <DoubleArrowLeftIcon className="h-4 w-4" />
-          </Button>
+          </Button> */}
           <Button
             variant="outline"
             className="h-8 w-8 p-0"
@@ -105,12 +105,12 @@ export function DataTablePagination<TData>({
             variant="outline"
             className="h-8 w-8 p-0"
             onClick={handleNextPage}
-            disabled={currentPage === numOfPages}
+            // disabled={currentPage === numOfPages}
           >
             <span className="sr-only">Go to next page</span>
             <ChevronRightIcon className="h-4 w-4" />
           </Button>
-          <Button
+          {/* <Button
             variant="outline"
             className="hidden h-8 w-8 p-0 lg:flex"
             onClick={() => {
@@ -121,7 +121,7 @@ export function DataTablePagination<TData>({
           >
             <span className="sr-only">Go to last page</span>
             <DoubleArrowRightIcon className="h-4 w-4" />
-          </Button>
+          </Button> */}
         </div>
       </div>
     </div>

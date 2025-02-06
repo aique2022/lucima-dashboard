@@ -55,7 +55,7 @@ export default function PandoraPage() {
 
   const transactionsData = data?.data || [];
   const totalTransactions = data?.total || 0;
-  const numOfPages = Math.ceil(totalTransactions / (data?.limit || 1));
+  const numOfPages = Math.ceil(totalTransactions / (data?.data?.limit || 1));
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
