@@ -50,10 +50,15 @@ export const fetchApi = async <T,>(
 };
 
 // Custom Hook for GET Requests
-export const useFetchData = <T,>(endpoint: string, token = "") => {
+export const useFetchData = <T,>(
+  endpoint: string,
+  token = "",
+  enabled = true
+) => {
   return useQuery<T, Error>({
     queryKey: ["data", endpoint],
     queryFn: () => fetchApi<T>(endpoint, { method: "GET", token }),
+    enabled,
   });
 };
 

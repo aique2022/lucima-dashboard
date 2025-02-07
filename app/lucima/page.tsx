@@ -49,13 +49,87 @@ export default function PandoraPage() {
         ).toISOString()}`
       : "";
 
-  const { data, error, isLoading } = useFetchData<any>(
+  const {
+    data,
+    error,
+    isLoading,
+    refetch: refetchTransactions,
+  } = useFetchData<any>(
     `/transactions/assignee/lucima?page=${page}&limit=${pageSize}${dateRangeQuery}&status=${status}&search=${debounced}`
   );
 
   const transactionsData = data?.data || [];
   const totalTransactions = data?.total || 0;
   const numOfPages = Math.ceil(totalTransactions / (data?.data?.limit || 1));
+
+  const {
+    data: dataExport,
+    error: errorExport,
+    isLoading: isLoadingExport,
+    refetch: refetchExport, // Separate refetch for export
+  } = useFetchData<any>(
+    `/transactions/assignee/lucima?${dateRangeQuery}&status=${status}&search=${debounced}`,
+    "",
+    false
+  );
+
+  // const exportData = dataExport?.data || [];
+  // const totalExportData = dataExport?.total || 0;
+
+  const handleDownload = async () => {
+    const { data: exportFetchedData } = await refetchExport();
+
+    if (!exportFetchedData?.data?.length) {
+      console.warn("No data available for export.");
+      return;
+    }
+
+    const filteredData = exportFetchedData.data.map((row: any) => {
+      const { _id, lockerName, rate, ...rest } = row;
+      return rest;
+    });
+
+    // Convert data to CSV
+    const headers = Object.keys(filteredData[0]).join(",") + "\n";
+
+    const csvContent =
+      headers +
+      filteredData
+        .map((row: any) =>
+          Object.values(row)
+            .map((value, index) => {
+              const key = Object.keys(row)[index];
+
+              // Format `doors` as "5, medium"
+              if (key === "doors" && Array.isArray(value)) {
+                return `"${value
+                  .map((door) => `${door.number}, ${door.size}`)
+                  .join("; ")}"`;
+              }
+
+              // Replace `+63` with `0` in mobile numbers
+              if (key === "mobileNumber" || key === "receiverMobileNumber") {
+                return `"${String(value).replace(/^\+63/, "0")}"`;
+              }
+
+              // Stringify other objects, keep normal values as is
+              return typeof value === "object" && value !== null
+                ? `"${JSON.stringify(value)}"`
+                : `"${value}"`;
+            })
+            .join(",")
+        )
+        .join("\n");
+
+    // Create Blob and trigger download
+    const blob = new Blob([csvContent], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `export-${new Date().toISOString()}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
@@ -136,6 +210,10 @@ export default function PandoraPage() {
                 </Button>
               )}
             </div>
+
+            <Button onClick={handleDownload} disabled={isLoadingExport}>
+              {isLoadingExport ? "Downloading..." : "Download"}
+            </Button>
           </div>
 
           {isLoading ? (
