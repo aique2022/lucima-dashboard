@@ -87,10 +87,10 @@ export const columns: ColumnDef<Transaction>[] = [
     },
   },
   {
-    accessorKey: "qpin",
+    accessorKey: "pricing",
     header: "Order Pricing",
     cell: () => (
-      <span className="bg-primary text-white px-4 py-1 text-sm rounded-full">
+      <span className="bg-primary text-white px-4 py-1 text-sm rounded-full dark:text-black">
         Free
       </span>
     ),
