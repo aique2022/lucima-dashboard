@@ -24,8 +24,58 @@ const formatDate = (value: unknown): string => {
 
 export const columns: ColumnDef<Transaction>[] = [
   {
+    accessorKey: "_id",
+    header: "Transaction ID",
+    cell: (info) => info.row.index + 1,
+  },
+  {
+    accessorKey: "createdAt",
+    header: "Date Created",
+    cell: (info) => formatDate(info.getValue()),
+  },
+  {
+    accessorKey: "id",
+    header: "Transaction Number",
+  },
+  {
+    accessorKey: "mobileNumber",
+    header: "Sender Number",
+  },
+  {
+    accessorKey: "receiverMobileNumber",
+    header: "Receiver Number",
+  },
+  {
+    accessorKey: "doors",
+    header: "Door",
+    cell: (info) => {
+      const doors = info.getValue() as { number: number; size: string }[];
+      return doors.length
+        ? doors.map((door) => `Door ${door.number}, ${door.size}`).join(", ")
+        : "N/A";
+    },
+  },
+  {
+    accessorKey: "status",
+    header: "Transaction Status",
+    cell: (info) => {
+      const value = info.getValue() as any;
+      return <StatusBadge status={value} />;
+    },
+  },
+  {
+    accessorKey: "pricing",
+    header: "Order Pricing",
+    cell: () => <span>₱ 0.00</span>,
+  },
+
+  {
+    accessorKey: "qpin",
+    header: "QPIN",
+  },
+  {
     accessorKey: "transactionHistory",
-    header: "Milestone",
+    header: "Transaction History",
     cell: (info) => {
       const history = info.getValue() as {
         transactionId: string;
@@ -45,59 +95,5 @@ export const columns: ColumnDef<Transaction>[] = [
         "N/A"
       );
     },
-  },
-  {
-    accessorKey: "_id",
-    header: "ID",
-    cell: (info) => info.row.index + 1,
-  },
-  {
-    accessorKey: "createdAt",
-    header: "Date Created",
-    cell: (info) => formatDate(info.getValue()),
-  },
-  {
-    accessorKey: "id",
-    header: "Transaction Number",
-  },
-  {
-    accessorKey: "mobileNumber",
-    header: "Sender Mobile Number",
-  },
-  {
-    accessorKey: "receiverMobileNumber",
-    header: "Receiver Mobile Number",
-  },
-  {
-    accessorKey: "doors",
-    header: "Door details",
-    cell: (info) => {
-      const doors = info.getValue() as { number: number; size: string }[];
-      return doors.length
-        ? doors.map((door) => `Door ${door.number}, ${door.size}`).join(", ")
-        : "N/A";
-    },
-  },
-  {
-    accessorKey: "status",
-    header: "Transaction Status",
-    cell: (info) => {
-      const value = info.getValue() as any;
-      return <StatusBadge status={value} />;
-    },
-  },
-  {
-    accessorKey: "pricing",
-    header: "Order Pricing",
-    cell: () => (
-      <span className="bg-primary text-white px-4 py-1 text-sm rounded-full dark:text-black">
-        Free
-      </span>
-    ),
-  },
-
-  {
-    accessorKey: "qpin",
-    header: "QPIN",
   },
 ];
