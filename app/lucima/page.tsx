@@ -22,7 +22,7 @@ export default function PandoraPage() {
   const [startDate, setStartDate] = useState<string | null>(null);
   const [endDate, setEndDate] = useState<string | null>(null);
 
-  const [status, setStatus] = useState<string[]>([]);
+  const [status, setStatus] = useState<string>("");
 
   const [search, setSearch] = useState<string>("");
 
@@ -38,8 +38,8 @@ export default function PandoraPage() {
     // { label: "rider-pickup", value: "rider-pickup" },
     // { label: "merchant-pickup", value: "merchant-pickup" },
     // { label: "out-for-delivery", value: "out-for-delivery" },
-    { label: "dropped", value: "dropped" },
-    { label: "completed", value: "completed" },
+    { label: "Dropped", value: "dropped" },
+    { label: "Completed", value: "completed" },
   ];
 
   const dateRangeQuery =
@@ -63,9 +63,9 @@ export default function PandoraPage() {
 
   const handleSelectTransStatus = (status: string, isChecked: boolean) => {
     if (isChecked) {
-      setStatus((prev) => [...prev, status]);
+      setStatus(status);
     } else {
-      setStatus((prev) => prev.filter((s) => s !== status));
+      setStatus("");
     }
   };
 
@@ -83,7 +83,7 @@ export default function PandoraPage() {
     setStartDate(null);
     setEndDate(null);
 
-    setStatus([]);
+    setStatus("");
 
     setSearch("");
   };
@@ -127,7 +127,7 @@ export default function PandoraPage() {
 
               {(search || status?.length > 0 || startDate || endDate) && (
                 <Button
-                  variant="destructive"
+                  variant="ghost"
                   className="h-8 px-2 lg:px-3 mt-4 md:mt-0"
                   onClick={resetFilters}
                 >

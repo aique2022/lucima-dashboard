@@ -57,7 +57,7 @@ const statusConfig: Record<StatusType, StatusConfig> = {
   },
   dropped: {
     label: "Dropped",
-    color: "bg-emerald-500 text-white",
+    color: "bg-orange-500 text-white",
   },
   completed: {
     label: "Completed",

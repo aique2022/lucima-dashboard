@@ -43,13 +43,22 @@ export function TeamSwitcher({
                     width={41}
                     className="me-1"
                   />
-                  <span className="truncate font-semibold">
-                    <p className="font-bold text-xl">
-                      <span className=" text-slate-600 text-2xl">
-                        Dashboard
-                      </span>
-                    </p>
-                  </span>
+                  <div className="flex flex-col justify-center px-2">
+                    <span className="truncate font-semibold">
+                      <p className="font-bold">
+                        <span className=" text-slate-600 text-[10px]">
+                          Admin
+                        </span>
+                      </p>
+                    </span>
+                    <span className="truncate font-semibold">
+                      <p className="font-bold">
+                        <span className=" text-slate-600 text-[16px]">
+                          Lucima
+                        </span>
+                      </p>
+                    </span>
+                  </div>
                 </div>
               </Link>
             </SidebarMenuButton>

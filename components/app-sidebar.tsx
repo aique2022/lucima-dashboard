@@ -44,7 +44,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+        <div className="py-2">
+          <TeamSwitcher teams={data.teams} />
+        </div>
       </SidebarHeader>
       <SidebarContent>
         <NavProjects projects={data.projects} />

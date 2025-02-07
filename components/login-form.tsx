@@ -129,7 +129,7 @@ export function LoginForm() {
               <p className="text-sm text-red-500">{errors.password.message}</p>
             )}
           </div>
-
+          {/* 
           <div className="flex items-center justify-between text-sm">
             <div className="flex items-center space-x-2">
               <Checkbox id="remember" {...register("rememberMe")} />
@@ -137,13 +137,13 @@ export function LoginForm() {
                 Remember me
               </Label>
             </div>
-            {/* <Link
+            <Link
               href="/forgot-password"
               className="text-purple-600 hover:text-purple-500"
             >
               Forgot Password?
-            </Link> */}
-          </div>
+            </Link>
+          </div> */}
 
           <Button
             type="submit"

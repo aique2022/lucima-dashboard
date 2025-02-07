@@ -74,7 +74,7 @@ const transactionStatusOptions = [
   {
     label: "Dropped",
     value: "dropped",
-    color: "bg-green-600 text-white",
+    color: "bg-orange-600 text-white",
   },
   {
     label: "Completed",
@@ -144,7 +144,7 @@ export function MilestoneModal({ milestoneData }: MilestoneModalProps) {
                       className="relative pl-10 flex items-start"
                     >
                       <div className="absolute left-4 top-8 -translate-y-1/2 w-6 h-6 rounded-full border-2 text-white bg-green-600 flex items-center justify-center z-10" />
-                      <div className="bg-white p-4 rounded-lg border shadow-sm w-full">
+                      <div className="bg-white p-4 rounded-lg border shadow-sm w-full dark:bg-transparent">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                           <div className="flex items-center gap-2 text-md">
                             <StatusBadge status={milestone.status} />

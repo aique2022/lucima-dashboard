@@ -15,7 +15,7 @@ interface TransactionStatusOption {
 interface TransactionStatusFilterProps {
   label: string;
   transactionStatusOptions: TransactionStatusOption[];
-  status: string[];
+  status: string;
   handleSelectTransStatus: (status: string, isChecked: boolean) => void;
 }
 
@@ -30,12 +30,14 @@ export function TransactionStatusFilter({
       <PopoverTrigger asChild>
         <Button variant="outline" className="h-10 border-dashed">
           <CirclePlusIcon className="mr-2 h-4 w-4" />
-          {label}:{" "}
-          {status.length > 0 &&
-            transactionStatusOptions
-              .filter((option) => status.includes(option.value))
-              .map((option) => option.label)
-              .join(", ")}
+          {label} <span className="text-gray-300">|</span>{" "}
+          <span className="bg-gray-100 h-auto w-auto px-2 rounded-md">
+            {status &&
+              transactionStatusOptions
+                .filter((option) => option.value === status)
+                .map((option) => option.label)
+                .join(", ")}
+          </span>
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0" align="start">
@@ -46,7 +48,7 @@ export function TransactionStatusFilter({
               className="flex items-center space-x-2 rounded-md p-2 hover:bg-accent cursor-pointer"
             >
               <Checkbox
-                checked={status.includes(option.value)}
+                checked={status === option.value}
                 onCheckedChange={(checked: boolean) =>
                   handleSelectTransStatus(option.value, checked)
                 }
