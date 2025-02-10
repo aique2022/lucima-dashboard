@@ -73,9 +73,6 @@ export default function PandoraPage() {
     false
   );
 
-  // const exportData = dataExport?.data || [];
-  // const totalExportData = dataExport?.total || 0;
-
   const handleDownload = async () => {
     const { data: exportFetchedData } = await refetchExport();
 
@@ -89,16 +86,32 @@ export default function PandoraPage() {
       return rest;
     });
 
-    // Convert data to CSV
-    const headers = Object.keys(filteredData[0]).join(",") + "\n";
+    // Define the desired field order and corresponding headers
+    const fieldMappings: Record<string, string> = {
+      createdAt: "Date Created",
+      transNumber: "Transaction Number",
+      mobileNumber: "Sender Number",
+      receiverMobileNumber: "Receiver Number",
+      doors: "Door",
+      transactionStatus: "Transaction Status",
+      qpin: "QPIN",
+      transactionHistory: "Transaction History",
+    };
 
+    const fieldOrder = Object.keys(fieldMappings); // Ensure correct ordering
+
+    // Generate CSV headers based on fieldMappings
+    const headers =
+      fieldOrder.map((key) => fieldMappings[key]).join(",") + "\n";
+
+    // Generate CSV content with ordered fields
     const csvContent =
       headers +
       filteredData
         .map((row: any) =>
-          Object.values(row)
-            .map((value, index) => {
-              const key = Object.keys(row)[index];
+          fieldOrder
+            .map((key) => {
+              const value = row[key];
 
               // Format `doors` as "5, medium"
               if (key === "doors" && Array.isArray(value)) {
