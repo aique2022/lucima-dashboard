@@ -1,19 +1,16 @@
 "use client";
 
-import * as React from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import Link from "next/link";
-import { Eye, EyeOff, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation"; // Import useRouter for navigation
-import Image from "next/image";
-import Logo from "@/app/assets/icon/logo.svg";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Eye, EyeOff, Lock, Mail, User } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import * as React from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
@@ -26,12 +23,12 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 export function LoginForm() {
   const [showPassword, setShowPassword] = React.useState(false);
   const [error, setError] = React.useState(false);
-  const router = useRouter(); // Create a router instance to navigate
+  const router = useRouter();
 
   // Default admin credentials
   const defaultAdminCredentials = {
-    email: "lucima@qube.com", // Replace with the admin's email
-    password: "pandoralucimaadmin2025", // Replace with the admin's password
+    email: "lucima@qube.com",
+    password: "pandoralucimaadmin2025",
   };
 
   const {
@@ -48,7 +45,6 @@ export function LoginForm() {
   const onSubmit = async (data: LoginFormValues) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    // Check if the entered credentials match the default admin credentials
     if (
       data.email === defaultAdminCredentials.email &&
       data.password === defaultAdminCredentials.password
@@ -61,56 +57,55 @@ export function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-transparent">
-      <div className="w-full max-w-[440px] bg-white p-8 rounded-xl shadow-lg dark:bg-transparent dark:border">
-        <div className="space-y-2 text-center">
-          <Image src={Logo} alt="lucima logo" className="h-[50px] w-[150px]" />
-
-          <h1 className="text-3xl font-bold text-gray-900"></h1>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="w-full max-w-md min-w-[528px] bg-white rounded-3xl shadow-sm p-8">
+        <div className="space-y-2">
+          <h1 className="text-2xl font-semibold tracking-tight">
+            Login to your account
+          </h1>
+          <p className="text-sm text-muted-foreground">
+            Welcome back! Please enter your details.
+          </p>
         </div>
 
-        {error && (
-          <p className="text-sm text-red-500 text-center">
-            Oops! Invalid Credentials
-          </p>
-        )}
-
         {/* Form */}
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 mt-4">
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="username">Username</Label>
             <div className="relative">
-              <Mail className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+              <User className="absolute left-3 top-2.5 h-5 w-5 text-muted-foreground" />
               <Input
-                id="email"
-                placeholder="name@example.com"
-                type="email"
-                autoComplete="email"
+                id="username"
+                placeholder="Username"
+                type="text"
                 {...register("email")}
                 className={cn(
-                  "pl-10 border rounded-lg",
-                  errors.email && "border-red-500 focus:ring-red-500"
+                  "pl-10",
+                  errors.email && "border-red-500 focus-visible:ring-red-500"
                 )}
               />
             </div>
             {errors.email && (
-              <p className="text-sm text-red-500">{errors.email.message}</p>
+              <p className="text-sm text-red-500">Invalid username</p>
             )}
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
             <div className="relative">
+              <Lock className="absolute left-3 top-2.5 h-5 w-5 text-muted-foreground" />
               <Input
                 id="password"
+                placeholder="Password"
                 type={showPassword ? "text" : "password"}
                 autoComplete="current-password"
                 {...register("password")}
                 className={cn(
-                  "pr-10 border rounded-lg",
+                  "pl-10 border rounded-lg",
                   errors.password && "border-red-500 focus:ring-red-500"
                 )}
               />
+
               <Button
                 type="button"
                 variant="ghost"
@@ -129,32 +124,34 @@ export function LoginForm() {
               <p className="text-sm text-red-500">{errors.password.message}</p>
             )}
           </div>
-          {/* 
-          <div className="flex items-center justify-between text-sm">
-            <div className="flex items-center space-x-2">
-              <Checkbox id="remember" {...register("rememberMe")} />
-              <Label htmlFor="remember" className="text-gray-600">
-                Remember me
-              </Label>
-            </div>
-            <Link
-              href="/forgot-password"
-              className="text-purple-600 hover:text-purple-500"
-            >
-              Forgot Password?
-            </Link>
-          </div> */}
+
+          {error && (
+            <p className="text-sm text-red-500 text-center">
+              Oops! Invalid Credentials
+            </p>
+          )}
 
           <Button
             type="submit"
-            className="w-full bg-green-600 hover:bg-green-500 text-white py-2 rounded-lg"
+            className="w-full bg-gradient-to-r from-[#00C290] via-[#0FB8AA] to-[#1FADC5] hover:opacity-90 transition-opacity"
             disabled={isSubmitting}
           >
-            {isSubmitting ? "Signing in..." : "Sign In"}
+            {isSubmitting ? "Logging in..." : "Login"}
           </Button>
         </form>
 
-        <p className="text-gray-400 text-center mt-5">Pandora dashboard 2025</p>
+        <div className="mt-6 text-center text-sm">
+          <Link
+            href="/privacy"
+            className="text-muted-foreground hover:underline"
+          >
+            Privacy policy
+          </Link>
+          <span className="text-muted-foreground mx-2">•</span>
+          <Link href="/terms" className="text-muted-foreground hover:underline">
+            Terms of use
+          </Link>
+        </div>
       </div>
     </div>
   );
