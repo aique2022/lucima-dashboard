@@ -44,9 +44,7 @@ export default function PandoraPage() {
 
   const dateRangeQuery =
     startDate && endDate
-      ? `&startDate=${startDate}&endDate=${new Date(
-          new Date(endDate).getTime() + 86400000
-        ).toISOString()}`
+      ? `&startDate=${startDate}&endDate=${new Date(endDate).toISOString()}`
       : "";
 
   const {
