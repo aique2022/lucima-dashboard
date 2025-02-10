@@ -87,11 +87,11 @@ export default function PandoraPage() {
     // Define the desired field order and corresponding headers
     const fieldMappings: Record<string, string> = {
       createdAt: "Date Created",
-      transNumber: "Transaction Number",
+      id: "Transaction Number",
       mobileNumber: "Sender Number",
       receiverMobileNumber: "Receiver Number",
       doors: "Door",
-      transactionStatus: "Transaction Status",
+      status: "Transaction Status",
       qpin: "QPIN",
       transactionHistory: "Transaction History",
     };
