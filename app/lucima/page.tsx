@@ -138,6 +138,7 @@ export default function PandoraPage() {
   const handleSelectTransStatus = (status: string, isChecked: boolean) => {
     if (isChecked) {
       setStatus(status);
+      setPage(1);
     } else {
       setStatus("");
     }
@@ -220,8 +221,8 @@ export default function PandoraPage() {
             <TableSkeleton />
           ) : (
             <DataTable
-              columns={columns}
-              data={transactionsData}
+              columns={columns(page, pageSize)}
+              data={transactionsData ?? []}
               totalItems={totalTransactions}
               numOfPages={numOfPages}
               onPaginationChange={handlePaginationChange}

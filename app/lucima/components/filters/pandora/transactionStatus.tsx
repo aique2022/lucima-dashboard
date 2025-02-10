@@ -31,7 +31,7 @@ export function TransactionStatusFilter({
         <Button variant="outline" className="h-10 border-dashed">
           <CirclePlusIcon className="mr-2 h-4 w-4" />
           {label} <span className="text-gray-300">|</span>{" "}
-          <span className="bg-gray-100 h-auto w-auto px-2 rounded-md">
+          <span className="bg-gray-100 h-auto w-auto px-2 rounded-md dark:text-black">
             {status &&
               transactionStatusOptions
                 .filter((option) => option.value === status)

@@ -48,10 +48,12 @@ export function DataTablePagination<TData>({
     }
   };
 
+  const newPage = currentPage + 1;
+
   return (
     <div className="flex items-center justify-between p-2">
       <div className="flex-1 text-sm text-muted-foreground">
-        {totalItems} total rows
+        Displaying {totalItems} items
       </div>
       <div className="flex items-center space-x-6 lg:space-x-8">
         <div className="flex items-center space-x-2">
@@ -68,7 +70,7 @@ export function DataTablePagination<TData>({
               <SelectValue placeholder={pageSize} />
             </SelectTrigger>
             <SelectContent side="top">
-              {[10, 20, 30, 40, 50, 100, 200].map((size) => (
+              {[10, 20, 30, 40, 50, 100, 150, 200].map((size) => (
                 <SelectItem key={size} value={`${size}`}>
                   {size}
                 </SelectItem>
@@ -76,9 +78,10 @@ export function DataTablePagination<TData>({
             </SelectContent>
           </Select>
         </div>
-        {/* <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-          Page {currentPage} of {numOfPages}
-        </div> */}
+        <div className="flex w-[100px] items-center justify-center text-sm font-medium">
+          Page {currentPage}
+          {/* of {numOfPages} */}
+        </div>
         <div className="flex items-center space-x-2">
           {/* <Button
             variant="outline"
@@ -105,7 +108,7 @@ export function DataTablePagination<TData>({
             variant="outline"
             className="h-8 w-8 p-0"
             onClick={handleNextPage}
-            // disabled={currentPage === numOfPages}
+            disabled={newPage >= numOfPages}
           >
             <span className="sr-only">Go to next page</span>
             <ChevronRightIcon className="h-4 w-4" />

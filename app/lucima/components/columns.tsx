@@ -22,12 +22,16 @@ const formatDate = (value: unknown): string => {
   return "N/A";
 };
 
-export const columns: ColumnDef<Transaction>[] = [
+export const columns = (
+  currentPage: number,
+  pageSize: number
+): ColumnDef<Transaction>[] => [
   {
-    accessorKey: "_id",
+    accessorFn: (_row, rowIndex) => (currentPage - 1) * pageSize + rowIndex + 1,
     header: "Transaction ID",
-    cell: (info) => info.row.index + 1,
+    cell: (info) => (currentPage - 1) * pageSize + info.row.index + 1,
   },
+
   {
     accessorKey: "createdAt",
     header: "Date Created",
