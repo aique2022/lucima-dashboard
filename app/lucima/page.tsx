@@ -146,6 +146,7 @@ export default function PandoraPage() {
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
+    setPage(1);
   };
 
   const handleSelectTransStatus = (status: string, isChecked: boolean) => {
@@ -160,6 +161,7 @@ export default function PandoraPage() {
   const handleDateRangeChange = (start: string | null, end: string | null) => {
     setStartDate(start);
     setEndDate(end);
+    setPage(1);
   };
 
   const handlePaginationChange = (newPage: number, newPageSize: number) => {
