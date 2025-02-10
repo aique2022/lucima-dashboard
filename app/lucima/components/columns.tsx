@@ -55,7 +55,14 @@ export const columns = (
     cell: (info) => {
       const doors = info.getValue() as { number: number; size: string }[];
       return doors.length
-        ? doors.map((door) => `Door ${door.number}, ${door.size}`).join(", ")
+        ? doors
+            .map(
+              (door) =>
+                `Door ${door.number}, ${
+                  door.size.charAt(0).toUpperCase() + door.size.slice(1)
+                }`
+            )
+            .join(", ")
         : "N/A";
     },
   },
