@@ -190,16 +190,17 @@ export default function PandoraPage() {
 
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex flex-col md:flex-row items-start gap-2 w-full md:w-auto">
-              <div className=" w-full">
-                <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground flex " />
+              <div className="relative w-full">
+                <Search className="absolute left-2 top-2.5 h-4 w-4 text-gray-500" />
                 <Input
                   type="text"
-                  placeholder="Search Transaction No#/ Sender Number/Receiver Number"
+                  placeholder="Transaction or mobile number"
                   value={search}
                   onChange={handleSearchChange}
-                  className="w-full"
+                  className="w-[250px] pl-8"
                 />
               </div>
+
               <DateRangePicker
                 handleDateRangeChange={handleDateRangeChange}
                 startDate={startDate}
