@@ -194,7 +194,7 @@ export default function PandoraPage() {
                 <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground flex " />
                 <Input
                   type="text"
-                  placeholder="Search Transaction No#"
+                  placeholder="Search Transaction No#/ Sender Number/Receiver Number"
                   value={search}
                   onChange={handleSearchChange}
                   className="w-full"
