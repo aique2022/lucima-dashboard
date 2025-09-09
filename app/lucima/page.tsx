@@ -29,15 +29,6 @@ export default function PandoraPage() {
   const debounced = useDebounce(search, 500);
 
   const transactionStatusOptions = [
-    // { label: "for-confirmation ", value: "for-confirmation" },
-    // { label: "for-pickup", value: "for-pickup" },
-    // { label: "in-logistics", value: "in-logistics" },
-    // { label: "rider-dropped", value: "rider-dropped" },
-    // { label: "processing", value: "processing" },
-    // { label: "processed", value: "processed" },
-    // { label: "rider-pickup", value: "rider-pickup" },
-    // { label: "merchant-pickup", value: "merchant-pickup" },
-    // { label: "out-for-delivery", value: "out-for-delivery" },
     { label: "Ready For Pickup", value: "READY_FOR_PICKUP" },
     { label: "Completed", value: "COMPLETED" },
   ];

@@ -1,3 +1,5 @@
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -5,15 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import {
-  Clock,
-  CheckCircle2,
-  XCircle,
-  AlertCircle,
-  MoreHorizontal,
-} from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 
 interface MilestoneData {
   transactionId: string;
@@ -27,58 +21,13 @@ interface MilestoneModalProps {
 
 const transactionStatusOptions = [
   {
-    label: "For Confirmation",
-    value: "for-confirmation",
-    color: "bg-blue-600 text-white",
-  },
-  {
-    label: "For Pickup",
-    value: "for-pickup",
-    color: "bg-orange-600 text-white",
-  },
-  {
-    label: "In Logistics",
-    value: "in-logistics",
-    color: "bg-orange-600 text-white",
-  },
-  {
-    label: "Rider Dropped",
-    value: "rider-dropped",
-    color: "bg-green-600 text-white",
-  },
-  {
-    label: "Processing",
-    value: "processing",
-    color: "bg-blue-600 text-white",
-  },
-  {
-    label: "Processed",
-    value: "processed",
-    color: "bg-green-600 text-white",
-  },
-  {
-    label: "Rider Pickup",
-    value: "rider-pickup",
-    color: "bg-orange-600 text-white",
-  },
-  {
-    label: "Merchant Pickup",
-    value: "merchant-pickup",
-    color: "bg-green-600 text-white",
-  },
-  {
-    label: "Out for Delivery",
-    value: "out-for-delivery",
-    color: "bg-orange-600 text-white",
-  },
-  {
-    label: "Dropped",
-    value: "dropped",
+    label: "Ready for pickup",
+    value: "READY_FOR_PICKUP",
     color: "bg-orange-600 text-white",
   },
   {
     label: "Completed",
-    value: "completed",
+    value: "COMPLETED",
     color: "bg-green-600 text-white",
   },
 ];
