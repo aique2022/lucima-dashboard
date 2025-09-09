@@ -38,8 +38,8 @@ export default function PandoraPage() {
     // { label: "rider-pickup", value: "rider-pickup" },
     // { label: "merchant-pickup", value: "merchant-pickup" },
     // { label: "out-for-delivery", value: "out-for-delivery" },
-    { label: "Dropped", value: "dropped" },
-    { label: "Completed", value: "completed" },
+    { label: "Ready For Pickup", value: "READY_FOR_PICKUP" },
+    { label: "Completed", value: "COMPLETED" },
   ];
 
   const dateRangeQuery =
